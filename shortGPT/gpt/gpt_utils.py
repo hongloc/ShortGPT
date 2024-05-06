@@ -89,12 +89,7 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
             #     temperature=temp)
             response = g4f.ChatCompletion.create(
                 model=g4f.models.gpt_35_turbo,
-                messages=[
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
-                ],
+                messages=messages,
                 max_tokens=max_tokens,
                 temperature=temp
             )
