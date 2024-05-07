@@ -16,6 +16,7 @@ from shortGPT.editing_utils.handle_videos import extract_random_clip_from_video
 from shortGPT.engine.abstract_content_engine import AbstractContentEngine
 from shortGPT.gpt import gpt_editing, gpt_translate, gpt_yt
 
+from shortGPT.utils.save_short import save_short
 
 class ContentShortEngine(AbstractContentEngine):
 
@@ -167,3 +168,4 @@ class ContentShortEngine(AbstractContentEngine):
                 f"---Youtube title---\n{self._db_yt_title}\n---Youtube description---\n{self._db_yt_description}")
         self._db_video_path = newFileName+".mp4"
         self._db_ready_to_upload = True
+        save_short(self._db_video_path, self._db_yt_title, self._db_yt_description)
