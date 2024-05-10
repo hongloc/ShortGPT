@@ -143,7 +143,11 @@ class ContentShortEngine(AbstractContentEngine):
                                                           'set_time_start': timing[0],
                                                           'set_time_end': timing[1]})
             if self._db_num_images:
+                print('db num images: ', self._db_num_images)
+                print('_db_timed_image_urls: ', self._db_timed_image_urls)
                 for timing, image_url in self._db_timed_image_urls:
+                    print('timing: ', timing)
+                    print('image_url: ', image_url)
                     videoEditor.addEditingStep(EditingStep.SHOW_IMAGE, {'url': image_url,
                                                                         'set_time_start': timing[0],
                                                                         'set_time_end': timing[1]})
