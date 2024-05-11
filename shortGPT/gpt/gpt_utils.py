@@ -88,7 +88,7 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
             #     max_tokens=max_tokens,
             #     temperature=temp)
             response = g4f.ChatCompletion.create(
-                model=g4f.models.gpt_35_turbo,
+                model=g4f.models.openchat_35,
                 messages=messages,
                 max_tokens=max_tokens,
                 temperature=temp
