@@ -69,7 +69,7 @@ def open_file(filepath):
         return infile.read()
 
 import g4f
-def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the answer to anything", temp=0.7, model="gpt-3.5-turbo", max_tokens=1000, remove_nl=True, conversation=None):
+def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the answer to anything. MAX TOKENS = 400.", temp=0.7, model="gpt-3.5-turbo", max_tokens=1000, remove_nl=True, conversation=None):
     # openai.api_key = ApiKeyManager.get_api_key("OPENAI")
     max_retry = 5
     retry = 0
@@ -88,7 +88,7 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
             #     max_tokens=max_tokens,
             #     temperature=temp)
             response = g4f.ChatCompletion.create(
-                model=g4f.models.openchat_35,
+                model=g4f.models.mixtral_8x7b,
                 messages=messages,
                 max_tokens=max_tokens,
                 temperature=temp
