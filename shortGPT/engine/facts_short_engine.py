@@ -10,7 +10,7 @@ class FactsShortEngine(ContentShortEngine):
                  num_images=None, watermark=None, language:Language = Language.ENGLISH):
         super().__init__(short_id=short_id, short_type="facts_shorts", background_video_name=background_video_name, background_music_name=background_music_name,
                  num_images=num_images, watermark=watermark, language=language, voiceModule=voiceModule)
-        
+        print('facts_type: ', facts_type)
         self._db_facts_type = facts_type
 
     def _generateScript(self):
