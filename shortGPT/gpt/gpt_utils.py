@@ -69,6 +69,26 @@ def open_file(filepath):
         return infile.read()
 
 import g4f
+def remove_g4f_finishreason(input_str):
+    regex = r"<g4f.*"
+
+    test_str = input_str
+
+    matches = re.finditer(regex, test_str, re.MULTILINE)
+    match_end = match_start = 0
+    for matchNum, match in enumerate(matches, start=1):
+        
+        print ("Match {matchNum} was found at {start}-{end}: {match}".format(matchNum = matchNum, start = match.start(), end = match.end(), match = match.group()))
+        match_start = match.start()
+        match_end = match.end()
+        for groupNum in range(0, len(match.groups())):
+            groupNum = groupNum + 1
+            
+            print ("Group {groupNum} found at {start}-{end}: {group}".format(groupNum = groupNum, start = match.start(groupNum), end = match.end(groupNum), group = match.group(groupNum)))
+    if match_end != match_start != 0:
+        test_str = test_str[:match_start]
+        print('test_str after edit: ', test_str)
+    return test_str
 def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the answer to anything. MAX TOKENS = 400.", temp=0.7, model="gpt-3.5-turbo", max_tokens=1000, remove_nl=True, conversation=None):
     # openai.api_key = ApiKeyManager.get_api_key("OPENAI")
     max_retry = 5
@@ -94,6 +114,7 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
                 temperature=temp
             )
             text = response.strip()
+            text = remove_g4f_finishreason(text)
             if remove_nl:
                 text = re.sub('\s+', ' ', text)
             filename = '%s_gpt3.txt' % time()
