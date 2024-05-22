@@ -100,7 +100,7 @@ def gpt3Turbo_completion(chat_prompt="", system="ONLY RESPOND IN ENGLISH. You ar
             else:
                 messages = [
                     {"role": "system", "content": system},
-                    {"role": "user", "content": chat_prompt}
+                    {"role": "user", "content": chat_prompt + '.ONLY RESPOND IN ENGLISH.'}
                 ]
             # response = openai.chat.completions.create(
             #     model=model,
@@ -108,7 +108,7 @@ def gpt3Turbo_completion(chat_prompt="", system="ONLY RESPOND IN ENGLISH. You ar
             #     max_tokens=max_tokens,
             #     temperature=temp)
             response = g4f.ChatCompletion.create(
-                model=g4f.models.gpt_35_turbo,
+                model=g4f.models.gpt_35_turbo_16k,
                 messages=messages,
                 max_tokens=max_tokens,
                 temperature=temp
