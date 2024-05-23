@@ -171,5 +171,5 @@ class ShortAutomationUI(AbstractComponentUI):
                 facts_subject = facts_subject
             else:
                 facts_subject = short_type
-            return FactsShortEngine(voice_module, facts_type=facts_subject, background_video_name=background_video, background_music_name=background_music, num_images=50, watermark=watermark, language=language)
+            return FactsShortEngine(voice_module, facts_type=facts_subject, background_video_name=background_video, background_music_name=background_music, num_images=numImages, watermark=watermark, language=language)
         raise gr.Error(f"Short type does not have a valid short engine: {short_type}")
