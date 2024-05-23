@@ -49,7 +49,7 @@ class ShortAutomationUI(AbstractComponentUI):
                     return gr.update(visible=x == AssetComponentsUtils.ELEVEN_TTS), gr.update(visible=x == AssetComponentsUtils.EDGE_TTS), gr.update(visible=x == AssetComponentsUtils.COQUI_TTS)
                 tts_engine.change(tts_engine_change, tts_engine, [eleven_tts, edge_tts, coqui_tts])
 
-                useImages = gr.Checkbox(label="Use images", value=True)
+                useImages = gr.Checkbox(label="Use images", value=False)
                 numImages = gr.Radio([5, 10, 25], value=None, label="Number of images per short", visible=True, interactive=True)
                 useImages.change(lambda x: gr.update(visible=x), useImages, numImages)
 
