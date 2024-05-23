@@ -30,21 +30,34 @@ class ContentShortEngine(AbstractContentEngine):
                 self._db_watermark = watermark
             self._db_background_video_name = background_video_name
             self._db_background_music_name = background_music_name
-
-        self.stepDict = {
-            1:  self._generateScript,
-            2:  self._generateTempAudio,
-            3:  self._speedUpAudio,
-            4:  self._timeCaptions,
-            5:  self._generateImageSearchTerms,
-            6:  self._generateImageUrls,
-            7:  self._chooseBackgroundMusic,
-            8:  self._chooseBackgroundVideo,
-            9:  self._prepareBackgroundAssets,
-            10: self._prepareCustomAssets,
-            11: self._editAndRenderShort,
-            12: self._addYoutubeMetadata
-        }
+        if num_images:
+            self.stepDict = {
+                1:  self._generateScript,
+                2:  self._generateTempAudio,
+                3:  self._speedUpAudio,
+                4:  self._timeCaptions,
+                5:  self._generateImageSearchTerms,
+                6:  self._generateImageUrls,
+                7:  self._chooseBackgroundMusic,
+                8:  self._chooseBackgroundVideo,
+                9:  self._prepareBackgroundAssets,
+                10: self._prepareCustomAssets,
+                11: self._editAndRenderShort,
+                12: self._addYoutubeMetadata
+            }
+        else:
+            self.stepDict = {
+                1:  self._generateScript,
+                2:  self._generateTempAudio,
+                3:  self._speedUpAudio,
+                4:  self._timeCaptions,
+                7:  self._chooseBackgroundMusic,
+                8:  self._chooseBackgroundVideo,
+                9:  self._prepareBackgroundAssets,
+                10: self._prepareCustomAssets,
+                11: self._editAndRenderShort,
+                12: self._addYoutubeMetadata
+            }
 
     @abstractmethod
     def _generateScript(self):
