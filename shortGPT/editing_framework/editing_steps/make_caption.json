@@ -10,8 +10,8 @@
 			"text": null,
 			"fontsize": 100,
 			"font": "Roboto-Bold",
-			"color": "white",
-			"stroke_width": 3,
+			"color": "#FFFF00",
+			"stroke_width": 5,
 			"stroke_color": "black",
 			"method": "caption",
 			"size": [
