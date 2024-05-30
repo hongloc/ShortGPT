@@ -108,7 +108,7 @@ def gpt3Turbo_completion(chat_prompt="", system="ONLY RESPOND IN ENGLISH. You ar
             #     max_tokens=max_tokens,
             #     temperature=temp)
             response = g4f.ChatCompletion.create(
-                model=g4f.models.gpt_35_turbo_16k,
+                model=g4f.models.claude_3_haiku,
                 messages=messages,
                 max_tokens=max_tokens,
                 temperature=temp
