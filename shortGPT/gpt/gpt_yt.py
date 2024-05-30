@@ -6,17 +6,17 @@ def generate_title_description_dict(content):
     chat, system = gpt_utils.load_local_yaml_prompt('prompt_templates/yt_title_description.yaml')
     chat = chat.replace("<<CONTENT>>", f"{content}")
     
-    while out["title"] == "" or out["description"] == "":
-        result = gpt_utils.gpt3Turbo_completion(chat_prompt=chat, system=system, temp=1)
-        print('result in generate title description: ', result)
-        try:
-            response = json.loads(result)
-            if "title" in response:
-                out["title"] = response["title"]
-            if "description" in response:
-                out["description"] = response["description"]
-        except Exception as e:
-            pass
+    # while out["title"] == "" or out["description"] == "":
+    #     result = gpt_utils.gpt3Turbo_completion(chat_prompt=chat, system=system, temp=1)
+    #     print('result in generate title description: ', result)
+    #     try:
+    #         response = json.loads(result)
+    #         if "title" in response:
+    #             out["title"] = response["title"]
+    #         if "description" in response:
+    #             out["description"] = response["description"]
+    #     except Exception as e:
+    #         pass
     print('title: ', out['title'])
     print('description: ', out['description'])
     return out['title'], out['description']
