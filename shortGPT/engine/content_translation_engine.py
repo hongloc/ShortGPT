@@ -70,11 +70,16 @@ class ContentTranslationEngine(AbstractContentEngine):
         self.verifyParameters(translated_timed_sentences=self._db_translated_timed_sentences)
 
         translated_audio_blocks = []
+        print('self._db_translated_timed_sentences: ', self._db_translated_timed_sentences)
         for i, ((t1, t2), translated_text) in tqdm(enumerate(self._db_translated_timed_sentences), desc="Generating translated audio"):
             self.logger(f"3/5 - Generating translated audio - {i+1} / {len(self._db_translated_timed_sentences)}")
             translated_voice = self.voiceModule.generate_voice(translated_text, self.dynamicAssetDir+f"translated_{i}_{self._db_target_language}.wav")
             if not translated_voice:
                 raise Exception('An error happending during audio voice creation')
+            print('t1: ', t1)
+            print('t2: ', t2)
+            print('translated_text: ', translated_text)
+            print('t2-t1 -0.05', t2-t1-0.05)
             final_audio_path = speedUpAudio(translated_voice, self.dynamicAssetDir+f"translated_{i}_{self._db_target_language}_spedup.wav", expected_duration=t2-t1 - 0.05)
             _, translated_duration = get_asset_duration(final_audio_path, isVideo=False)
             translated_audio_blocks.append([[t1, t1+translated_duration], final_audio_path])
