@@ -86,7 +86,8 @@ class MultiLanguageTranslationEngine(AbstractContentEngine):
             translated_voice = self.voiceModule.generate_voice(translated_text, self.dynamicAssetDir+f"translated_{i}_{self._db_target_language}.wav")
             if not translated_voice:
                 raise Exception('An error happending during audio voice creation')
-            final_audio_path = speedUpAudio(translated_voice, self.dynamicAssetDir+f"translated_{i}_{self._db_target_language}_spedup.wav", expected_duration=t2-t1 - 0.05)
+            # final_audio_path = speedUpAudio(translated_voice, self.dynamicAssetDir+f"translated_{i}_{self._db_target_language}_spedup.wav", expected_duration=t2-t1 - 0.05)
+            final_audio_path = speedUpAudio(translated_voice, self.dynamicAssetDir+f"translated_{i}_{self._db_target_language}_spedup.wav")
             _, translated_duration = get_asset_duration(final_audio_path, isVideo=False)
             translated_audio_blocks.append([[t1, t1+translated_duration], final_audio_path])
         self._db_audio_bits = translated_audio_blocks
