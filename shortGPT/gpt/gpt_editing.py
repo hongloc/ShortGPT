@@ -27,16 +27,19 @@ def getImageQueryPairs(captions,n=15 ,maxTime=2):
 
 import re
 def extractListInsideResponseForVideoSearchQueries(text):
-    # Define the regex pattern to extract the list
-    pattern = re.compile(r"\[\[\[.*?\]\]\]", re.DOTALL)
+    # Use regex to find the JSON array
+    pattern = r'\[\s*\[\[\d+\.\d*, \d+\.\d*\], \[.*?\]\](?:,\s*\[\[\d+\.\d*, \d+\.\d*\], \[.*?\]\])*\s*\]'
+    match = re.search(pattern, text, re.DOTALL)
 
-    # Find all matches
-    matches = pattern.findall(text)
-
-    # Since there's only one list in this case, we can take the first match
-    if matches:
-        extracted_list = matches[0]
-        return extracted_list
+    if match:
+        json_array_str = match.group(0)
+        print('json_array_str: ', json_array_str)
+        return json_array_str
+        # Parse the JSON array
+        # data = json.loads(json_array_str)
+        # print(data)
+    else:
+        print("No match found")
     return None
 
 def getVideoSearchQueriesTimed(captions_timed):
