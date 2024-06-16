@@ -142,7 +142,6 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
             print('response: ', response)
             text = response.strip()
             text = remove_g4f_finishreason(text)
-            text = text.replace("Here is the list of video search queries in the required format:", "").strip()
             print('text: ',text)
             if remove_nl:
                 text = re.sub('\s+', ' ', text)

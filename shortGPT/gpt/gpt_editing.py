@@ -25,6 +25,19 @@ def getImageQueryPairs(captions,n=15 ,maxTime=2):
         pairs[i] = ((pairs[i][0], end), pairs[i][1])
     return pairs
 
+import re
+def extractListInsideResponseForVideoSearchQueries(text):
+    # Define the regex pattern to extract the list
+    pattern = re.compile(r"\[\[\[.*?\]\]\]", re.DOTALL)
+
+    # Find all matches
+    matches = pattern.findall(text)
+
+    # Since there's only one list in this case, we can take the first match
+    if matches:
+        extracted_list = matches[0]
+        return extracted_list
+    return None
 
 def getVideoSearchQueriesTimed(captions_timed):
     end = captions_timed[-1][0][1]
@@ -33,7 +46,7 @@ def getVideoSearchQueriesTimed(captions_timed):
     out = [[[0,0],""]]
     while out[-1][0][1] != end:
         try:
-            out = json.loads(gpt_utils.gpt3Turbo_completion(chat_prompt=chat, system=system, temp=1).replace("'", '"'))
+            out = json.loads(extractListInsideResponseForVideoSearchQueries(gpt_utils.gpt3Turbo_completion(chat_prompt=chat, system=system, temp=1).replace("'", '"')))
         except Exception as e:
             print(e)
             print("not the right format")
