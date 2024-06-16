@@ -40,7 +40,9 @@ def extractListInsideResponseForVideoSearchQueries(text):
     return None
 
 def getVideoSearchQueriesTimed(captions_timed):
+    print('captions_timed: ', captions_timed)
     end = captions_timed[-1][0][1]
+    print('end: ', end)
     chat, system = gpt_utils.load_local_yaml_prompt('prompt_templates/editing_generate_videos.yaml')
     chat = chat.replace("<<TIMED_CAPTIONS>>", f"{captions_timed}")
     out = [[[0,0],""]]
