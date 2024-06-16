@@ -61,25 +61,31 @@ class ContentTranslationEngine(AbstractContentEngine):
 
             translated_timed_sentences = []
             for i, ((t1, t2), text) in tqdm(enumerate(self._db_speech_blocks), desc="Translating content"):
+                print('translate content t1: ', t1)
+                print('translate content t2: ', t2)
+                print('translate content text: ', text)
                 self.logger(f"2/5 - Translating text content - {i+1} / {len(self._db_speech_blocks)}")
                 translated_text = translateContent(text, self._db_target_language)
                 translated_timed_sentences.append([[t1, t2], translated_text])
             self._db_translated_timed_sentences = translated_timed_sentences
 
     def _generate_translated_audio(self):
+        print('im heree')
+        print('wh khong hcya')
         self.verifyParameters(translated_timed_sentences=self._db_translated_timed_sentences)
-
+        print('noi da????YYYYYYYYYYYYYYYYYYYYYYYY')
         translated_audio_blocks = []
         print('self._db_translated_timed_sentences: ', self._db_translated_timed_sentences)
         for i, ((t1, t2), translated_text) in tqdm(enumerate(self._db_translated_timed_sentences), desc="Generating translated audio"):
-            self.logger(f"3/5 - Generating translated audio - {i+1} / {len(self._db_translated_timed_sentences)}")
-            translated_voice = self.voiceModule.generate_voice(translated_text, self.dynamicAssetDir+f"translated_{i}_{self._db_target_language}.wav")
-            if not translated_voice:
-                raise Exception('An error happending during audio voice creation')
             print('t1: ', t1)
             print('t2: ', t2)
             print('translated_text: ', translated_text)
             print('t2-t1 -0.05', t2-t1-0.05)
+            self.logger(f"3/5 - Generating translated audio - {i+1} / {len(self._db_translated_timed_sentences)}")
+            translated_voice = self.voiceModule.generate_voice(translated_text, self.dynamicAssetDir+f"translated_{i}_{self._db_target_language}.wav")
+            if not translated_voice:
+                raise Exception('An error happending during audio voice creation')
+            
             final_audio_path = speedUpAudio(translated_voice, self.dynamicAssetDir+f"translated_{i}_{self._db_target_language}_spedup.wav", expected_duration=t2-t1 - 0.05)
             _, translated_duration = get_asset_duration(final_audio_path, isVideo=False)
             translated_audio_blocks.append([[t1, t1+translated_duration], final_audio_path])
