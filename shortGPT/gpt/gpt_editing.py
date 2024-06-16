@@ -53,4 +53,5 @@ def getVideoSearchQueriesTimed(captions_timed):
         except Exception as e:
             print(e)
             print("not the right format")
+    print('da return out: ', out)
     return out

@@ -78,6 +78,7 @@ class ContentVideoEngine(AbstractContentEngine):
         self.verifyParameters(captionsTimed=self._db_timed_captions)
         # Returns a list of pairs of timing (t1,t2) + 3 search video queries, such as: [[t1,t2], [search_query_1, search_query_2, search_query_3]]
         self._db_timed_video_searches = gpt_editing.getVideoSearchQueriesTimed(self._db_timed_captions)
+        print('da luu video search terms roi: ', self._db_timed_video_searches)
 
     def _generateVideoUrls(self):
         timed_video_searches = self._db_timed_video_searches
