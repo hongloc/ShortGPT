@@ -139,8 +139,10 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
                 max_tokens=max_tokens,
                 temperature=temp
             )
+            print('response: ', response)
             text = response.strip()
             text = remove_g4f_finishreason(text)
+            print('text: ',text)
             if remove_nl:
                 text = re.sub('\s+', ' ', text)
             filename = '%s_gpt3.txt' % time()
