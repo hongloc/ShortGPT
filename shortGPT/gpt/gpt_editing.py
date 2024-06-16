@@ -34,7 +34,7 @@ def extractListInsideResponseForVideoSearchQueries(text):
     if match:
         json_array_str = match.group(0)
         print('json_array_str: ', json_array_str)
-        return json_array_str
+        return json_array_str.strip()
         # Parse the JSON array
         # data = json.loads(json_array_str)
         # print(data)
@@ -55,6 +55,7 @@ def getVideoSearchQueriesTimed(captions_timed):
             print('tmp_str: ', tmp_str)
             out = json.loads(tmp_str)
             print('out: ', out)
+            return out
         except Exception as e:
             print(e)
             print("not the right format")
