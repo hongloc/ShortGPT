@@ -78,6 +78,10 @@ class MultiLanguageTranslationEngine(AbstractContentEngine):
 
         translated_audio_blocks = []
         for i, ((t1, t2), translated_text) in tqdm(enumerate(self._db_translated_timed_sentences), desc="Generating translated audio"):
+            print('t1: ', t1)
+            print('t2: ', t2)
+            print('translated_text: ', translated_text)
+            print('t2-t1 -0.05', t2-t1-0.05)
             self.logger(f"3/5 - Generating translated audio - {i+1} / {len(self._db_translated_timed_sentences)}")
             translated_voice = self.voiceModule.generate_voice(translated_text, self.dynamicAssetDir+f"translated_{i}_{self._db_target_language}.wav")
             if not translated_voice:
